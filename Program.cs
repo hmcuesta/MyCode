@@ -12,18 +12,14 @@ namespace SG
         {
             StreamReader sr = new StreamReader("C:\\imagenes\\datos.in");
             StreamWriter sw = new StreamWriter("C:\\imagenes\\datos.out");
-            string line;
-            List<string> arr = new List<string>();
-           
+            string line;           
             while ((line = sr.ReadLine()) != null)
             {
                 line = line.ToUpper();
-                arr = line.Split(' ').ToList();
-                var wrd = arr.Where(str => (str.StartsWith("P") && str.EndsWith("R")) || 
-                                           (str.StartsWith("H") && str.Contains("O")))
-                                           .Select(str => str).ToList();
+                var palabras = line.Split(' ').ToList().Where(str => (str.StartsWith("P") && str.EndsWith("R")) || 
+                                           (str.StartsWith("H") && str.Contains("O"))).ToList();
 
-                wrd.ForEach(s => line = line.Replace(s.Trim(), new String('#', s.Count())));
+                palabras.ForEach(s => line = line.Replace(s.Trim(), new String('#', s.Count())));
             
                 Console.WriteLine(line);
                 sw.WriteLine(line);
